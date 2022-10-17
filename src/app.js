@@ -17,6 +17,6 @@ app.use(morgan('dev'));
 
 app.use('/api/accounts', accountRouter);
 app.use('/api/transactions', transactionRouter);
-app.use('/api/auth/login', require('./routes/auth.routes'));
+app.use('/api/auth/login', authRouter);
 
 module.exports = app;

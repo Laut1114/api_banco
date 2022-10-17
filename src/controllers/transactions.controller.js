@@ -22,11 +22,11 @@ const getTransactions = async (_req = request, res = response) => {
 
 // GET TRANSACTION ID -------------------------------------------------------------------------------------------------------------------------
 const getTransactionId = async (req = request, res = response) => {
-    const { id } = req.body;
+    const { id } = req.params;
 
     try {
         const connection = await getConnection();
-        const result = await connection.query('SELECT * FROM accounts WHERE id = ?', [id]);
+        const result = await connection.query('SELECT * FROM transactions WHERE id = ?', [id]);
 
         return res.status(200).json({
             ok: true,
@@ -44,21 +44,19 @@ const getTransactionId = async (req = request, res = response) => {
 
 // POST NEW TRANSACTIONS -----------------------------------------------------------------------------------------------------------------------
 const newTransaction = async(req = request, res = response) => {
-    const origen = "";
-    const { username, first_name, last_name, email, cantidad } = req.body;
+    const { origen, destino, cantidad } = req.body;
 
-    const destino = {
-        username,
-        first_name,
-        last_name,
-        email
+    const transaction = {
+        origen,
+        destino,
+        cantidad
     }
 
     const timestamp = Date();
 
     try {
         const connection = await getConnection();
-        await connection.query("INSERT INTO `transactions` SET ?", [origen, destino, cantidad, timestamp]);
+        await connection.query("INSERT INTO `transactions` SET ?", [transaction, timestamp]);
 
         return res.status(200).json({
             ok: true,

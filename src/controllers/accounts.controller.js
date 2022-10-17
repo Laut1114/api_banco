@@ -83,7 +83,7 @@ const newAccount = async (req = request, res = response) => {
 // PUT ACCOUNT -------------------------------------------------------------------------------------------------------------------------
 const updAccount = async (req = request, res = response) => {
     const { id } = req.params;
-    const { username, first_name, last_name, email, password, groups, user_permission, is_staff, is_root } = req.body;
+    const { username, first_name, last_name, email, password, groups, user_permissions, is_staff, is_root } = req.body;
 
     const account = {
         username,
@@ -92,7 +92,7 @@ const updAccount = async (req = request, res = response) => {
         email,
         password,
         groups,
-        user_permission,
+        user_permissions,
         is_staff,
         is_root
     }
@@ -103,7 +103,7 @@ const updAccount = async (req = request, res = response) => {
 
     try {
         const connection = await getConnection();
-        await connection.query('UPDATE accounts SET ? WHERE `accounts`.`id` = ?', [account, id]);
+        await connection.query('UPDATE accounts SET ? WHERE `accounts` . `id` = ?', [account, id]);
 
         return res.status(200).json({
             ok: true,
