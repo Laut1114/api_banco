@@ -5,7 +5,7 @@ const validarJWT = (req = request, res = response, next) => {
 
     const token = req.header("x-token");
 
-    console.log(token);
+    console.log('token desde validar-jwt: ' + token);
 
     if (!token) {
         return res.status(401).json({
@@ -16,6 +16,8 @@ const validarJWT = (req = request, res = response, next) => {
 
     try {
         const { id } = jwt.verify(token, process.env.JWT_SECRET);
+
+        //Estamos seguros de que el token es correcto.
         req.id = id;
 
         next();
