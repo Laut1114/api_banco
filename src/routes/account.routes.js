@@ -5,10 +5,9 @@ import { getAccounts, getAccountId, newAccount, updAccount, delAccount } from '.
 
 const router = Router();
 
-// router.get('/', validarJWT, getAccounts);
 router.get('/', getAccounts);
 
-router.get('/:id', getAccountId);
+router.get('/:id:username', getAccountId);
 
 router.post('/add', newAccount);
 
