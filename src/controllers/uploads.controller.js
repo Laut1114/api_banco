@@ -103,7 +103,7 @@ const updateImage = async (req = request, res = response) => {
 }
 
 
-export default {
+module.exports = {
     subirArchivo,
     updateImage,
     getImage

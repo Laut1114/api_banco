@@ -1,12 +1,12 @@
-import { Router } from 'express';
-import { subirArchivo, updateImage, getImage } from '../controllers/uploads.controller';
+import { Router } from "express";
+import { getImage, subirArchivo, updateImage } from '../controllers/uploads.controller';
 
-const route = Router();
+const router = Router();
 
-route.post('/', subirArchivo);
+router.get('/:id:username', getImage);
 
-route.get('/:id:username', getImage);
+router.post('/', subirArchivo);
 
-route.put('/updateAvatar/:username', updateImage);
+router.put('/updAvatar/:username', updateImage);
 
-module.exports = route;
+module.exports = router;
