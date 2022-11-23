@@ -52,11 +52,9 @@ const newTransaction = async(req = request, res = response) => {
         cantidad
     }
 
-    const timestamp = Date();
-
     try {
         const connection = await getConnection();
-        await connection.query("INSERT INTO `transactions` SET ?", [transaction, timestamp]);
+        await connection.query("INSERT INTO `transactions` SET ?", [transaction]);
 
         return res.status(200).json({
             ok: true,
