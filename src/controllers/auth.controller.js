@@ -10,8 +10,6 @@ const login = async (req = request, res = response) => {
         const connection = await getConnection();
         const resultado = await connection.query('SELECT id, password FROM accounts WHERE username = ?', username);
 
-        console.log(resultado[0]);
-
         // SE BUSCA QUE ESTE EL USUARIO EN LA BASE DE DATOS
         if (resultado.lenght < 1) {
             return res.status(404).json({
@@ -28,8 +26,6 @@ const login = async (req = request, res = response) => {
                 msg: 'Contraseña incorrecta'
             });
         }
-
-        // console.log(resultado[0].id);
 
         // SI EXISTE EL USUARIO Y LA CONTRASEÑA ES CORRECTA GENERA EL TOKEN
         const token = await generarJWT(resultado[0].id);

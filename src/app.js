@@ -6,7 +6,6 @@ import transactionRouter from './routes/transactions.routes';
 import authRouter from './routes/auth.routes';
 import uploadRouter from './routes/uploads.routes'
 
-
 const port = 3000;
 
 const fileUpload = require('express-fileUpload');
