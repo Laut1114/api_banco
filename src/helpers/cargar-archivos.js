@@ -3,7 +3,6 @@ import { v4 as uuidv4 } from 'uuid';
 
 const cargarArchivos = (fileUpload, extensiones = ['jpg', 'png', 'jpeg', 'svg'], pathUbication = '') => {
     return new Promise((resolve, reject) => {
-        
         const { archivo } = fileUpload;
 
         const nombre_extension = archivo.name.split('.');
@@ -23,7 +22,7 @@ const cargarArchivos = (fileUpload, extensiones = ['jpg', 'png', 'jpeg', 'svg'],
 
             resolve(nombreTemporal);
         });
-    })
+    });
 }
 
 module.exports = {

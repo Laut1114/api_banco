@@ -7,6 +7,8 @@ import { existsSync, unlinkSync } from 'fs';
 
 const subirArchivo = async (req = request, res = response) => {
 
+    console.log(req.files);
+
     if (!req.files || Object.keys(req.files).length === 0 || !req.files.archivo) {
         return res.status(400).send('Los archivos no han sido subidos.');
     }
@@ -21,23 +23,22 @@ const subirArchivo = async (req = request, res = response) => {
 
 const getImage = async (req = request, res = response) => {
 
-    const { id, username } = req.params;
+    const { username } = req.params;
 
     try {
         
         const connection = await getConnection();
-        const user = await connection.query('SELECT id, username, avatar FROM accounts WHERE id = ? OR username = ? ', [id, username]);
+        const user = await connection.query('SELECT id, username, avatar FROM accounts WHERE id = ? OR username = ? ', [ username ]);
 
         if (user.length < 1) {
-            
             return res.status(400).json({
-                msg: `No existe usuario con id: ${id}`
+                msg: `No se pudo traer el avatar`
             });
 
         } else {
-            
             //limpiar imagenes previas
             const img = user[0].avatar;
+
             if (img) {
                 const pathImage = join(__dirname, '../uploads/images', username, img);
                 if (existsSync(pathImage)) {
@@ -59,7 +60,6 @@ const getImage = async (req = request, res = response) => {
             error: error
         })
     }
-
 }
 
 

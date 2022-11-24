@@ -83,10 +83,10 @@ const newAccount = async (req = request, res = response) => {
 // PUT ACCOUNT -------------------------------------------------------------------------------------------------------------------------
 const updAccount = async (req = request, res = response) => {
     const { id } = req.params;
-    const { username, first_name, last_name, email, password, groups, user_permissions, is_staff, is_root } = req.body;
+    const { saldo, first_name, last_name, email, password, groups, user_permissions, is_staff, is_root } = req.body;
 
     const account = {
-        username,
+        saldo,
         first_name,
         last_name,
         email,
@@ -97,9 +97,11 @@ const updAccount = async (req = request, res = response) => {
         is_root
     }
 
-    // se encripta la contraseña
-    const salt = bcrypt.genSaltSync();
-    account.password = bcrypt.hashSync(password, salt);
+    // bcrypt.compareSync(password,)
+
+    // // se encripta la contraseña
+    // const salt = bcrypt.genSaltSync();
+    // account.password = bcrypt.hashSync(password, salt);
 
     try {
         const connection = await getConnection();

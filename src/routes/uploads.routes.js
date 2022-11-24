@@ -3,7 +3,7 @@ import { getImage, subirArchivo, updateImage } from '../controllers/uploads.cont
 
 const router = Router();
 
-router.get('/:id:username', getImage);
+router.get('/:username', getImage);
 
 router.post('/', subirArchivo);
 
